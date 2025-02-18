@@ -1,5 +1,6 @@
 {
     "require": {
-        "illuminate/database": "^11.41"
+        "illuminate/database": "^11.41",
+        "ramsey/uuid": "^4.7"
     }
 }

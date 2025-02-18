@@ -9,6 +9,8 @@ class User extends Model
 {
     protected $table = 'users';
 
+    public $timestamps = false;
+
     protected $fillable = ['username', 'lastLogin', 'email', 'password'];
 
     public function setPasswordAttribute($password)
@@ -22,14 +24,28 @@ class Licence extends Model
 {
     protected $table = 'licences';
 
-    protected $fillable = ['name', 'active', 'limit_device', 'endDate'];
+    public $timestamps = false;
+
+    protected $fillable = ['name', 'active', 'limit_device', 'end_date', 'uuid'];
+
+    public function devices()
+    {
+        return $this->hasMany(Device::class, 'licence_id', 'id');
+    }
 }
 
 class Device extends Model
 {
     protected $table = 'devices';
 
-    protected $fillable = ['fingerprint', 'active'];
+    public $timestamps = false;
+
+    protected $fillable = ['fingerprint', 'active', 'name'];
+
+    public function licence()
+    {
+        return $this->belongsTo(Licence::class, 'licence_id', 'id');
+    }
 }
 function create_tables()
 {
@@ -48,16 +64,18 @@ function create_tables()
     if (!$schema->hasTable('licences')) {
         $schema->create('licences', function ($table) {
             $table->increments('id');
-            $table->string('name')->nullable();
+            $table->string('name');
             $table->boolean('active')->default(true);
-            $table->boolean('limit_device');
-            $table->date('endDate');
+            $table->uuid('uuid')->unique();
+            $table->unsignedInteger('limit_device')->nullable();
+            $table->date('end_date');
         });
     }
 
     if (!$schema->hasTable('devices')) {
         $schema->create('devices', function ($table) {
             $table->increments('id');
+            $table->string('name')->nullable();
             $table->string('fingerprint')->unique();
             $table->boolean('active')->default(true);
             $table->unsignedInteger('licence_id'); // Foreign key for Licences
