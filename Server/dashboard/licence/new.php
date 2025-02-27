@@ -18,7 +18,7 @@
 
         $new_licence = Licence::create([
             "name" => $name,
-            "active" => $active_status,
+            "active" => $active_status=='on',
             "limit_device" => $limit_status ? $limit_device : Null,
             "end_date" => $end_date,
             "uuid" => Uuid::uuid4()->toString()
