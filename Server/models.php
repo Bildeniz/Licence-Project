@@ -23,6 +23,7 @@ class User extends Model
 class Licence extends Model
 {
     protected $table = 'licences';
+    protected $primaryKey = 'id';
 
     public $timestamps = false;
 
@@ -76,7 +77,7 @@ function create_tables()
         $schema->create('devices', function ($table) {
             $table->increments('id');
             $table->string('name')->nullable();
-            $table->string('fingerprint')->unique();
+            $table->string('fingerprint');
             $table->boolean('active')->default(true);
             $table->unsignedInteger('licence_id'); // Foreign key for Licences
             $table->foreign('licence_id')->references('id')->on('licences')->onDelete('cascade');
