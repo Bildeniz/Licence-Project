@@ -43,6 +43,8 @@
         die(json_encode($res));
     }
 
+    $res["end_date"] = $licence->end_date;
+
     $device = Device::where("fingerprint", $data["fingerprint"])
         ->where('licence_id', $licence->id)
         ->get()
