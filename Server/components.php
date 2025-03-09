@@ -18,8 +18,14 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                   <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                      <a class="nav-link active" href="/logout.php">Logout</a>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        '.$_SESSION["username"].'
+                      </a>
+                      <ul class="dropdown-menu" style="z-index: 1021;">
+                        <li><a class="dropdown-item" href="/logout.php">Logout</a></li>
+                        <li><a class="dropdown-item" href="/change_password.php">Change Password</a></li>
+                      </ul>
                     </li>
                   </ul>
                 </div>

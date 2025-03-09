@@ -60,6 +60,11 @@ function create_tables()
             $table->string('email')->nullable();
             $table->string('password');
         });
+
+        User::create([
+            'username' => 'admin',
+            'password' => password_hash('123456789', PASSWORD_DEFAULT)
+        ]);
     }
 
     if (!$schema->hasTable('licences')) {
