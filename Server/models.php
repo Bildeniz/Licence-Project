@@ -63,7 +63,7 @@ function create_tables()
 
         User::create([
             'username' => 'admin',
-            'password' => password_hash('123456789', PASSWORD_DEFAULT)
+            'password' => '123456789'
         ]);
     }
 

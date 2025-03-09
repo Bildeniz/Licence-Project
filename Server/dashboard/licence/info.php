@@ -61,7 +61,6 @@
             </div>
         </div>
 
-        <!-- Cihazlar için Tablo -->
         <div class="card shadow">
             <div class="card-header bg-dark text-white">
                 <h3 class="card-title mb-0">Devices</h3>

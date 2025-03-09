@@ -8,15 +8,16 @@
     if(isset($_SESSION['username'])){
         header("Location: /dashboard.php");
     }
-
+    var_dump(password_verify("123456789", '$2y$12$0vgW/Wf6jLv4XDFg9GEVNeEyIMY.MAUe35E0Rda.6R/3rEWzFnXWu'));
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $user = User::where('username', $_POST['username'])->first();
 
-        if ($user && password_verify($_POST['password'], $user->password)) {
+        if (isset($user) && password_verify($_POST['password'], $user->password)) {
             $user->lastLogin = date("Y-m-d");
             $user->save();
 
             $_SESSION['username'] = $user->username;
+            $_SESSION['id'] = $user->id;
             $_SESSION['flashes'] = [];
             header("Location: /dashboard.php");
 
